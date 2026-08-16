@@ -25,6 +25,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   const [dark, setDark] = useState(true)
   const [mounted, setMounted] = useState(false)
   const [paletteOpen, setPaletteOpen] = useState(false)
+  const [language, setLanguage] = useState<'CZ' | 'EN'>('CZ')
 
   // Adopt whatever the pre-paint script already applied.
   useEffect(() => {
@@ -159,6 +160,40 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         </header>
 
         <main className="engrave flex-1 px-4 pb-32 pt-6 md:px-8 md:pb-16 md:pt-8">{children}</main>
+
+        <footer className="border-t border-border bg-card/40 px-4 py-7 md:px-8 md:py-5">
+          <div className="flex flex-col gap-5 text-sm text-muted-foreground md:flex-row md:items-center md:justify-between">
+            <nav aria-label="Právní a informační odkazy" className="flex flex-wrap items-center gap-x-5 gap-y-2">
+              <Link href="/kontakt" className="transition-colors hover:text-foreground">Kontakt</Link>
+              <Link href="/obchodni-podminky" className="transition-colors hover:text-foreground">Obchodní podmínky</Link>
+              <Link href="/ochrana-osobnich-udaju" className="transition-colors hover:text-foreground">Zásady ochrany osobních údajů</Link>
+              <Link href="/nastaveni-cookies" className="transition-colors hover:text-foreground">Nastavení cookies</Link>
+            </nav>
+
+            <div className="flex items-center gap-5">
+              <div className="flex rounded-lg border border-border bg-background p-0.5" role="group" aria-label="Výběr jazyka">
+                {(['CZ', 'EN'] as const).map((item) => (
+                  <button
+                    key={item}
+                    type="button"
+                    onClick={() => setLanguage(item)}
+                    aria-pressed={language === item}
+                    className={cn(
+                      'min-w-10 rounded-md px-2.5 py-1.5 font-mono text-[11px] font-semibold transition-colors',
+                      language === item ? 'bg-card text-foreground shadow-sm' : 'text-muted-foreground hover:text-foreground',
+                    )}
+                  >
+                    {item}
+                  </button>
+                ))}
+              </div>
+              <div className="flex items-center gap-3" aria-label="Sociální sítě">
+                <a href="https://facebook.com" target="_blank" rel="noreferrer" aria-label="Facebook" className="grid size-5 place-items-center rounded-full bg-current text-[13px] font-bold leading-none text-card transition-colors hover:bg-foreground">f</a>
+                <a href="https://instagram.com" target="_blank" rel="noreferrer" aria-label="Instagram" className="grid size-5 place-items-center rounded-[5px] border-2 border-current transition-colors hover:text-foreground"><span className="size-1.5 rounded-full border border-current" /></a>
+              </div>
+            </div>
+          </div>
+        </footer>
       </div>
 
       {/* ── Floating dock (mobile) ── */}
