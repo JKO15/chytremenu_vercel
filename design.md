@@ -19,10 +19,10 @@ Používej pouze tematické tokeny z `app/globals.css`. Přímé barvy v kompone
 
 | Role | Hex | Token | Použití |
 | --- | --- | --- | --- |
-| Primární teal | `#4FD1C5` | `brand` | logo, značkové prvky, fotkové štítky, aktivní signály |
+| Primární teal | `#4FD1C5` | `brand`, `primary` | logo, primární akce, aktivní navigace, progres, fotkové štítky |
 | Sekundární apricot | `#F6AD55` | `brand-2` | sdílení, nákup, upozornění, teplý sekundární signál |
 
-V dark mode jsou tyto barvy použity přímo. Ve světlém režimu se pro textové a plné UI prvky používají kontrastnější odvozené tokeny `primary` a `accent`; přesné brand tokeny zůstávají pro logo a prvky na tmavých podkladech.
+Primární teal `#4FD1C5` se používá přímo v obou režimech přes token `primary`; text v popředí používá kontrastní tmavý token. `brand` zůstává aliasem stejné barvy pro logo a fotkové štítky.
 
 ### Neutrály
 

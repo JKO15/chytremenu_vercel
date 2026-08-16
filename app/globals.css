@@ -110,10 +110,8 @@
   --sidebar-ring: oklch(0.786 0.115 186.5);
 }
 
-/* ── Daylight variant: same instrument, paper housing ──
-   #4FD1C5 and #F6AD55 are too light to carry text or white ink on paper,
-   so primary/accent deepen along the *same hue* while --brand/--brand-2
-   keep the exact hexes for the mark and photo chips. */
+  /* ── Daylight variant: same instrument, paper housing ──
+     The primary teal remains the exact brand color in both themes. */
 .light {
   color-scheme: light;
 
@@ -130,16 +128,16 @@
   --border: oklch(0.218 0.02 206 / 12%);
   --input: oklch(0.218 0.02 206 / 18%);
 
-  --primary: oklch(0.575 0.105 187);
-  --primary-foreground: oklch(0.99 0.004 190);
-  --ring: oklch(0.575 0.105 187);
+  --primary: oklch(0.786 0.115 186.5);
+  --primary-foreground: oklch(0.21 0.035 200);
+  --ring: oklch(0.786 0.115 186.5);
 
   --accent: oklch(0.635 0.14 60);
   --accent-foreground: oklch(0.99 0.008 60);
 
   --destructive: oklch(0.55 0.19 25);
 
-  --chart-1: oklch(0.575 0.105 187);
+  --chart-1: oklch(0.786 0.115 186.5);
   --chart-2: oklch(0.635 0.14 60);
   --chart-3: oklch(0.7 0.016 204);
   --chart-4: oklch(0.85 0.011 204);
@@ -147,12 +145,12 @@
 
   --sidebar: oklch(0.965 0.007 202);
   --sidebar-foreground: oklch(0.218 0.02 206);
-  --sidebar-primary: oklch(0.575 0.105 187);
-  --sidebar-primary-foreground: oklch(0.99 0.004 190);
+  --sidebar-primary: oklch(0.786 0.115 186.5);
+  --sidebar-primary-foreground: oklch(0.21 0.035 200);
   --sidebar-accent: oklch(0.925 0.013 204);
   --sidebar-accent-foreground: oklch(0.285 0.022 206);
   --sidebar-border: oklch(0.218 0.02 206 / 12%);
-  --sidebar-ring: oklch(0.575 0.105 187);
+  --sidebar-ring: oklch(0.786 0.115 186.5);
 }
 
 @layer base {
