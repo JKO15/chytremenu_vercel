@@ -76,9 +76,9 @@ export function RecipeVisual({
         <div className="pointer-events-none absolute inset-0 grid place-items-center">
           <div className="relative mt-8 flex items-center gap-6 md:gap-10">
             <ForkKnife className="size-24 shrink-0 -rotate-6 stroke-[1.1] text-brand md:size-36" />
-            <div className="relative size-48 shrink-0 rounded-full border-[18px] border-brand/80 bg-brand/20 shadow-[0_18px_0_-5px_oklch(0_0_0_/_28%)] md:size-72 md:border-[22px]">
-              <div className="absolute inset-6 rounded-full border-2 border-brand-2/70 md:inset-8" />
-              <div className="absolute left-1/2 top-1/2 size-16 -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand-2/90 shadow-[12px_16px_0_oklch(0.72_0.12_187)] md:size-24" />
+            <div className="relative size-48 shrink-0 rounded-full border-[18px] border-brand/80 bg-brand/20 shadow-[0_22px_0_-5px_oklch(0_0_0_/_30%),inset_0_8px_0_oklch(1_0_0_/_10%)] md:size-72 md:border-[22px]">
+              <div className="absolute inset-6 rounded-full border-2 border-brand-2/70 bg-brand-2/10 md:inset-8" />
+              <div className="absolute left-1/2 top-1/2 size-16 -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand-2/90 shadow-[12px_16px_0_oklch(0.72_0.12_187),inset_-5px_-5px_0_oklch(0_0_0_/_12%)] md:size-24" />
             </div>
             <span className="flex h-36 w-14 shrink-0 rotate-6 flex-col items-center gap-1 text-brand md:h-48 md:w-18">
               <span className="h-24 w-7 rounded-[55%_55%_30%_30%] border-2 border-current md:h-32 md:w-9" />
