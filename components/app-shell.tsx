@@ -162,7 +162,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         <main className="engrave flex-1 px-4 pb-32 pt-6 md:px-8 md:pb-16 md:pt-8">{children}</main>
 
         <footer className="border-t border-border/70 px-4 py-6 md:px-8 md:py-5">
-          <div className="flex flex-col gap-4 text-xs text-muted-foreground md:mx-auto md:max-w-6xl md:flex-row md:items-center md:justify-between">
+          <div className="flex flex-col gap-4 text-xs text-muted-foreground md:mx-auto md:max-w-[1240px] md:flex-row md:items-center md:justify-between">
             <nav aria-label="Právní a informační odkazy" className="flex flex-wrap items-center gap-x-4 gap-y-2">
               <Link href="/kontakt" className="transition-colors hover:text-foreground">Kontakt</Link>
               <Link href="/obchodni-podminky" className="transition-colors hover:text-foreground">Obchodní podmínky</Link>
