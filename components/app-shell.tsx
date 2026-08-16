@@ -152,6 +152,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
                 <Trash2 className="size-4" />
                 <span>Zrušit účet</span>
               </Link>
+              <div className="my-1 h-px bg-border" />
               <button type="button" role="menuitem" onClick={() => setAccountOpen(false)} className="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground">
                 <LogOut className="size-4" />
                 <span>Odhlásit se</span>
