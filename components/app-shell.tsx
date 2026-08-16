@@ -5,11 +5,15 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import {
   CalendarRange,
+  LogOut,
+  Mail,
   Moon,
   ScrollText,
   Search,
+  Settings2,
   ShoppingBasket,
   Sun,
+  Trash2,
 } from 'lucide-react'
 import { CommandPalette } from '@/components/command-palette'
 import { cn } from '@/lib/utils'
@@ -25,6 +29,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   const [dark, setDark] = useState(true)
   const [mounted, setMounted] = useState(false)
   const [paletteOpen, setPaletteOpen] = useState(false)
+  const [accountOpen, setAccountOpen] = useState(false)
   const [language, setLanguage] = useState<'CZ' | 'EN'>('CZ')
 
   // Adopt whatever the pre-paint script already applied.
@@ -113,9 +118,47 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           {dark ? <Sun className="size-4" /> : <Moon className="size-4" />}
         </button>
 
-        <span className="mt-3 grid size-9 place-items-center rounded-xl border border-border font-mono text-[11px] font-semibold">
-          JK
-        </span>
+        <div className="relative mt-3">
+          <button
+            type="button"
+            onClick={() => setAccountOpen((value) => !value)}
+            aria-expanded={accountOpen}
+            aria-haspopup="menu"
+            aria-label="Otevřít uživatelské menu"
+            className={cn(
+              'grid size-9 place-items-center rounded-xl border border-border font-mono text-[11px] font-semibold transition-colors hover:bg-secondary',
+              accountOpen && 'border-primary/50 bg-primary/10 text-primary',
+            )}
+          >
+            JK
+          </button>
+          {accountOpen ? (
+            <div className="absolute bottom-0 left-12 z-50 w-64 rounded-2xl border border-border bg-card p-2 text-sm shadow-xl" role="menu" aria-label="Uživatelské menu">
+              <div className="px-3 py-2">
+                <p className="font-semibold text-foreground">Jakub Kopp</p>
+                <p className="mt-0.5 text-xs text-muted-foreground">Nastavení účtu</p>
+              </div>
+              <div className="my-1 h-px bg-border" />
+              <Link href="/nastaveni/email" role="menuitem" onClick={() => setAccountOpen(false)} className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground">
+                <Mail className="size-4" />
+                <span>Změnit e-mail</span>
+              </Link>
+              <Link href="/nastaveni/rohlik" role="menuitem" onClick={() => setAccountOpen(false)} className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground">
+                <Settings2 className="size-4" />
+                <span>Nastavení Rohlíku</span>
+              </Link>
+              <div className="my-1 h-px bg-border" />
+              <Link href="/nastaveni/zrusit-ucet" role="menuitem" onClick={() => setAccountOpen(false)} className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-destructive transition-colors hover:bg-destructive/10">
+                <Trash2 className="size-4" />
+                <span>Zrušit účet</span>
+              </Link>
+              <button type="button" role="menuitem" onClick={() => setAccountOpen(false)} className="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground">
+                <LogOut className="size-4" />
+                <span>Odhlásit se</span>
+              </button>
+            </div>
+          ) : null}
+        </div>
       </aside>
 
       {/* ── Content column ── */}
