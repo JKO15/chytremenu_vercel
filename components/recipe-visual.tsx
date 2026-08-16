@@ -1,5 +1,4 @@
 import Image from 'next/image'
-import { ChefHat } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 type RecipeVisualProps = {
@@ -62,7 +61,6 @@ export function RecipeVisual({
           ) : (
             <span className="font-mono text-[9px] font-semibold uppercase tracking-[0.14em] text-white/80">bez fotky</span>
           )}
-          <ChefHat className={cn('shrink-0 opacity-90', compact ? 'size-7' : 'size-11')} />
         </div>
       </div>
     </div>
