@@ -161,17 +161,17 @@ export function AppShell({ children }: { children: React.ReactNode }) {
 
         <main className="engrave flex-1 px-4 pb-32 pt-6 md:px-8 md:pb-16 md:pt-8">{children}</main>
 
-        <footer className="border-t border-border bg-card/40 px-4 py-7 md:px-8 md:py-5">
-          <div className="flex flex-col gap-5 text-sm text-muted-foreground md:flex-row md:items-center md:justify-between">
-            <nav aria-label="Právní a informační odkazy" className="flex flex-wrap items-center gap-x-5 gap-y-2">
+        <footer className="border-t border-border/70 px-4 py-6 md:px-8 md:py-5">
+          <div className="flex flex-col gap-4 text-xs text-muted-foreground md:mx-auto md:max-w-6xl md:flex-row md:items-center md:justify-between">
+            <nav aria-label="Právní a informační odkazy" className="flex flex-wrap items-center gap-x-4 gap-y-2">
               <Link href="/kontakt" className="transition-colors hover:text-foreground">Kontakt</Link>
               <Link href="/obchodni-podminky" className="transition-colors hover:text-foreground">Obchodní podmínky</Link>
-              <Link href="/ochrana-osobnich-udaju" className="transition-colors hover:text-foreground">Zásady ochrany osobních údajů</Link>
-              <Link href="/nastaveni-cookies" className="transition-colors hover:text-foreground">Nastavení cookies</Link>
+              <Link href="/ochrana-osobnich-udaju" className="transition-colors hover:text-foreground">Ochrana údajů</Link>
+              <Link href="/nastaveni-cookies" className="transition-colors hover:text-foreground">Cookies</Link>
             </nav>
 
-            <div className="flex items-center gap-5">
-              <div className="flex rounded-lg border border-border bg-background p-0.5" role="group" aria-label="Výběr jazyka">
+            <div className="flex items-center gap-4">
+              <div className="flex items-center gap-1 rounded-lg border border-border/70 bg-background/50 p-1" role="group" aria-label="Výběr jazyka">
                 {(['CZ', 'EN'] as const).map((item) => (
                   <button
                     key={item}
@@ -179,17 +179,17 @@ export function AppShell({ children }: { children: React.ReactNode }) {
                     onClick={() => setLanguage(item)}
                     aria-pressed={language === item}
                     className={cn(
-                      'min-w-10 rounded-md px-2.5 py-1.5 font-mono text-[11px] font-semibold transition-colors',
-                      language === item ? 'bg-card text-foreground shadow-sm' : 'text-muted-foreground hover:text-foreground',
+                      'min-w-8 rounded-md px-2 py-1 font-mono text-[10px] font-semibold transition-colors',
+                      language === item ? 'bg-primary/10 text-primary' : 'text-muted-foreground hover:text-foreground',
                     )}
                   >
                     {item}
                   </button>
                 ))}
               </div>
-              <div className="flex items-center gap-3" aria-label="Sociální sítě">
-                <a href="https://facebook.com" target="_blank" rel="noreferrer" aria-label="Facebook" className="grid size-5 place-items-center rounded-full bg-current text-[13px] font-bold leading-none text-card transition-colors hover:bg-foreground">f</a>
-                <a href="https://instagram.com" target="_blank" rel="noreferrer" aria-label="Instagram" className="grid size-5 place-items-center rounded-[5px] border-2 border-current transition-colors hover:text-foreground"><span className="size-1.5 rounded-full border border-current" /></a>
+              <div className="flex items-center gap-2 border-l border-border/70 pl-4" aria-label="Sociální sítě">
+                <a href="https://facebook.com" target="_blank" rel="noreferrer" aria-label="Facebook" className="grid size-5 place-items-center rounded-full bg-muted-foreground text-[12px] font-bold leading-none text-background transition-colors hover:bg-foreground">f</a>
+                <a href="https://instagram.com" target="_blank" rel="noreferrer" aria-label="Instagram" className="grid size-5 place-items-center rounded-[5px] border-2 border-muted-foreground transition-colors hover:border-foreground"><span className="size-1.5 rounded-full border border-current" /></a>
               </div>
             </div>
           </div>

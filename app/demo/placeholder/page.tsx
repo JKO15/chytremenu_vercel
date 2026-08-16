@@ -1,6 +1,5 @@
 import Link from 'next/link'
 import { ArrowLeft, Check, ImageOff } from 'lucide-react'
-import { AppShell } from '@/components/app-shell'
 import { RecipeVisual } from '@/components/recipe-visual'
 
 const variants = [
@@ -29,8 +28,7 @@ const variants = [
 
 export default function PlaceholderDemoPage() {
   return (
-    <AppShell>
-      <div className="mx-auto flex max-w-[1240px] flex-col gap-8">
+    <div className="mx-auto flex max-w-[1240px] flex-col gap-8">
         <header className="flex flex-col gap-5 border-b border-border pb-7">
           <Link
             href="/recepty"
@@ -123,6 +121,5 @@ export default function PlaceholderDemoPage() {
           ))}
         </section>
       </div>
-    </AppShell>
   )
 }
