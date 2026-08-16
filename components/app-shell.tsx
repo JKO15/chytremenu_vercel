@@ -188,7 +188,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
               <button type="button" onClick={() => setDeleteAccountModalOpen(false)} aria-label="Zavřít dialog" className="grid size-8 place-items-center rounded-lg text-xl leading-none text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground">×</button>
             </div>
             <p className="mt-5 text-sm leading-6 text-muted-foreground">Na váš e-mail odešleme potvrzovací odkaz. K trvalému smazání účtu dojde až po kliknutí na tento odkaz ve vaší schránce.</p>
-            <div className="mt-4 rounded-xl border border-brand-2/50 bg-brand-2/20 px-4 py-3 text-sm leading-6 text-brand-2-foreground">
+            <div className="mt-4 rounded-xl border border-brand-2/50 bg-brand-2/15 px-4 py-3 text-sm leading-6 text-foreground">
               <p className="font-semibold">Důležité</p>
               <p className="mt-1">Odkaz platí 24 hodin. Pokud požádáte o nový odkaz, předchozí platnost okamžitě zaniká.</p>
             </div>
