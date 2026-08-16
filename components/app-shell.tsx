@@ -188,12 +188,13 @@ export function AppShell({ children }: { children: React.ReactNode }) {
               <button type="button" onClick={() => setDeleteAccountModalOpen(false)} aria-label="Zavřít dialog" className="grid size-8 place-items-center rounded-lg text-xl leading-none text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground">×</button>
             </div>
             <p className="mt-5 text-sm leading-6 text-muted-foreground">Na váš e-mail odešleme potvrzovací odkaz. K trvalému smazání účtu dojde až po kliknutí na tento odkaz ve vaší schránce.</p>
-            <div className="mt-4 rounded-xl border border-accent/40 bg-accent/15 px-4 py-3 text-sm leading-6 text-accent-foreground">
-              Odkaz platí 24 hodin. Pokud požádáte o nový odkaz, předchozí platnost okamžitě zaniká.
+            <div className="mt-4 rounded-xl border border-brand-2/50 bg-brand-2/20 px-4 py-3 text-sm leading-6 text-brand-2-foreground">
+              <p className="font-semibold">Důležité</p>
+              <p className="mt-1">Odkaz platí 24 hodin. Pokud požádáte o nový odkaz, předchozí platnost okamžitě zaniká.</p>
             </div>
             <div className="mt-6 flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
               <button type="button" onClick={() => setDeleteAccountModalOpen(false)} className="inline-flex h-10 items-center justify-center rounded-xl border border-border px-4 text-sm font-semibold text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground">Zrušit</button>
-              <button type="button" onClick={() => setDeleteAccountModalOpen(false)} className="inline-flex h-10 items-center justify-center rounded-xl bg-destructive px-4 text-sm font-semibold text-destructive-foreground transition-colors hover:bg-destructive/90">Odeslat odkaz e-mailem</button>
+              <button type="button" onClick={() => setDeleteAccountModalOpen(false)} className="inline-flex h-10 items-center justify-center rounded-xl bg-primary px-4 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90">Odeslat odkaz e-mailem</button>
             </div>
           </section>
         </div>
