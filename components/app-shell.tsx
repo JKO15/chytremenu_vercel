@@ -31,6 +31,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   const [paletteOpen, setPaletteOpen] = useState(false)
   const [accountOpen, setAccountOpen] = useState(false)
   const [rohlikModalOpen, setRohlikModalOpen] = useState(false)
+  const [deleteAccountModalOpen, setDeleteAccountModalOpen] = useState(false)
   const [language, setLanguage] = useState<'CZ' | 'EN'>('CZ')
 
   // Adopt whatever the pre-paint script already applied.
@@ -149,10 +150,10 @@ export function AppShell({ children }: { children: React.ReactNode }) {
                 <span>Nastavení Rohlíku</span>
               </button>
               <div className="my-1 h-px bg-border" />
-              <Link href="/nastaveni/zrusit-ucet" role="menuitem" onClick={() => setAccountOpen(false)} className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-destructive transition-colors hover:bg-destructive/10">
+              <button type="button" role="menuitem" onClick={() => { setAccountOpen(false); setDeleteAccountModalOpen(true) }} className="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-destructive transition-colors hover:bg-destructive/10">
                 <Trash2 className="size-4" />
                 <span>Zrušit účet</span>
-              </Link>
+              </button>
               <div className="my-1 h-px bg-border" />
               <button type="button" role="menuitem" onClick={() => setAccountOpen(false)} className="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground">
                 <LogOut className="size-4" />
@@ -172,6 +173,28 @@ export function AppShell({ children }: { children: React.ReactNode }) {
             </div>
             <p className="mt-4 text-sm leading-6 text-muted-foreground">Přihlášení proběhne na stránkách Rohlík.cz (OAuth). Heslo do aplikace neukládáme. Propojení může časem vypršet — pak účet znovu připojte tlačítkem níže.</p>
             <button type="button" onClick={() => setRohlikModalOpen(false)} className="mt-6 inline-flex h-10 w-full items-center justify-center rounded-xl bg-primary px-4 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90">Připojit účet rohlík</button>
+          </section>
+        </div>
+      ) : null}
+
+      {deleteAccountModalOpen ? (
+        <div className="fixed inset-0 z-50 grid place-items-center bg-foreground/45 p-4 backdrop-blur-sm" role="presentation" onMouseDown={(event) => { if (event.target === event.currentTarget) setDeleteAccountModalOpen(false) }}>
+          <section role="dialog" aria-modal="true" aria-labelledby="delete-account-dialog-title" className="w-full max-w-md rounded-2xl border border-destructive/30 bg-card p-6 shadow-2xl">
+            <div className="flex items-start justify-between gap-4">
+              <div className="flex items-start gap-3">
+                <span className="grid size-9 shrink-0 place-items-center rounded-xl bg-destructive/10 text-destructive"><Trash2 className="size-4" /></span>
+                <h2 id="delete-account-dialog-title" className="pt-1 text-lg font-semibold tracking-tight">Zrušení účtu</h2>
+              </div>
+              <button type="button" onClick={() => setDeleteAccountModalOpen(false)} aria-label="Zavřít dialog" className="grid size-8 place-items-center rounded-lg text-xl leading-none text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground">×</button>
+            </div>
+            <p className="mt-5 text-sm leading-6 text-muted-foreground">Na váš e-mail odešleme potvrzovací odkaz. K trvalému smazání účtu dojde až po kliknutí na tento odkaz ve vaší schránce.</p>
+            <div className="mt-4 rounded-xl border border-accent/40 bg-accent/15 px-4 py-3 text-sm leading-6 text-accent-foreground">
+              Odkaz platí 24 hodin. Pokud požádáte o nový odkaz, předchozí platnost okamžitě zaniká.
+            </div>
+            <div className="mt-6 flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
+              <button type="button" onClick={() => setDeleteAccountModalOpen(false)} className="inline-flex h-10 items-center justify-center rounded-xl border border-border px-4 text-sm font-semibold text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground">Zrušit</button>
+              <button type="button" onClick={() => setDeleteAccountModalOpen(false)} className="inline-flex h-10 items-center justify-center rounded-xl bg-destructive px-4 text-sm font-semibold text-destructive-foreground transition-colors hover:bg-destructive/90">Odeslat odkaz e-mailem</button>
+            </div>
           </section>
         </div>
       ) : null}
