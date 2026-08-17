@@ -194,6 +194,21 @@
     box-shadow: inset 0 1px 0 0 var(--border);
   }
 
+  /* Airy product surfaces for public-facing pages */
+  .soft-grid {
+    background-image: linear-gradient(
+        to right,
+        color-mix(in oklab, var(--primary) 7%, transparent) 1px,
+        transparent 1px
+      ),
+      linear-gradient(
+        to bottom,
+        color-mix(in oklab, var(--primary) 7%, transparent) 1px,
+        transparent 1px
+      );
+    background-size: 4rem 4rem;
+  }
+
   /* One shared scrim so text stays legible over any photo, in either theme.
      Two stacked layers: a deep foot for the caption, a soft wash for the top chips. */
   .scrim {
