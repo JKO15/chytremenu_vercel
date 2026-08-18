@@ -27,6 +27,7 @@ Webová aplikace pro plánování jídel, správu receptů a přípravu nákupn�
 
 ### Knihovna receptů
 
+- Každý recept má mít vlastní obrázek; pokud obrázek není k dispozici, může uživatel zvolit vizuální placeholder.
 - Přehled dostupných receptů s fotografií, kategorií, časem přípravy a nutričními údaji.
 - Filtrování podle typu jídla.
 - Vyhledávání podle názvu, suroviny nebo štítku.
