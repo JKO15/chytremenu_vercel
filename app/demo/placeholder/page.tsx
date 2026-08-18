@@ -110,6 +110,45 @@ export default function PlaceholderDemoPage() {
           </div>
         </section>
 
+        <section className="flex flex-col gap-5 border-t border-border pt-7" aria-labelledby="size-variants">
+          <div className="flex flex-col gap-2">
+            <p className="tag text-primary">responzivní použití / všechny velikosti</p>
+            <h2 id="size-variants" className="text-2xl font-semibold tracking-tight md:text-3xl">
+              Jeden motiv, od miniatury po hero.
+            </h2>
+            <p className="max-w-2xl text-sm leading-6 text-muted-foreground">
+              Placeholder se přizpůsobí místu, kde se recept právě zobrazuje. Motiv, kontrast i označení bez fotografie zůstávají čitelné v každé velikosti.
+            </p>
+          </div>
+
+          <div className="grid items-end gap-5 sm:grid-cols-2 lg:grid-cols-4" aria-label="Velikostní varianty placeholderu">
+            <div className="flex flex-col gap-2">
+              <div className="relative isolate aspect-square size-16 overflow-hidden rounded-xl border border-border shadow-lg shadow-black/10">
+                <RecipeVisual src={undefined} alt="Miniatura receptu" variant="plate" compact sizes="64px" />
+              </div>
+              <span className="tag text-muted-foreground">miniatura · 64 px</span>
+            </div>
+            <div className="flex flex-col gap-2">
+              <div className="relative isolate aspect-[4/3] w-full max-w-40 overflow-hidden rounded-2xl border border-border shadow-lg shadow-black/10">
+                <RecipeVisual src={undefined} alt="Recept v seznamu" variant="bowl" compact sizes="160px" />
+              </div>
+              <span className="tag text-muted-foreground">seznam · 160 px</span>
+            </div>
+            <div className="flex flex-col gap-2">
+              <div className="relative isolate aspect-[4/3] w-full max-w-56 overflow-hidden rounded-2xl border border-border shadow-lg shadow-black/10">
+                <RecipeVisual src={undefined} alt="Recept v galerii" variant="kitchen" showTitle sizes="224px" />
+              </div>
+              <span className="tag text-muted-foreground">karta · 224 px</span>
+            </div>
+            <div className="flex flex-col gap-2">
+              <div className="relative isolate aspect-[16/10] w-full overflow-hidden rounded-2xl border border-border shadow-lg shadow-black/10">
+                <RecipeVisual src={undefined} alt="Recept v detailu" variant="plate" showTitle sizes="(min-width: 1024px) 25vw, 100vw" />
+              </div>
+              <span className="tag text-muted-foreground">hero · responzivní šířka</span>
+            </div>
+          </div>
+        </section>
+
         <section className="grid gap-4 border-t border-border pt-6 md:grid-cols-3">
           {['V galerii', 'V jídelníčku', 'V detailu receptu'].map((label) => (
             <div key={label} className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.1em] text-muted-foreground">
