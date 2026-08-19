@@ -5,13 +5,14 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import {
   CalendarRange,
+  Croissant,
   LogOut,
   Mail,
   Moon,
   ScrollText,
   Search,
   ShoppingBasket,
-  Store,
+  ShoppingCart,
   Sun,
   Trash2,
 } from 'lucide-react'
@@ -151,12 +152,12 @@ export function AppShell({ children }: { children: React.ReactNode }) {
                 <span>Změnit e-mail</span>
               </Link>
               <button type="button" role="menuitem" onClick={() => { setAccountOpen(false); setShopModalOpen('rohlik') }} className="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground">
-                <ShoppingBasket className="size-4" />
+                <Croissant className="size-4" />
                 <span className="flex-1">Rohlík.cz</span>
                 <ConnectionStatus connected={shopConnections.rohlik} />
               </button>
               <button type="button" role="menuitem" onClick={() => { setAccountOpen(false); setShopModalOpen('kosik') }} className="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground">
-                <Store className="size-4" />
+                <ShoppingCart className="size-4" />
                 <span className="flex-1">Košík.cz</span>
                 <ConnectionStatus connected={shopConnections.kosik} />
               </button>
