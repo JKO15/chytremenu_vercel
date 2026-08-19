@@ -10,12 +10,13 @@ import {
   Moon,
   ScrollText,
   Search,
-  Settings2,
   ShoppingBasket,
+  ShoppingCart,
   Sun,
   Trash2,
 } from 'lucide-react'
 import { CommandPalette } from '@/components/command-palette'
+import { PurchaseSettingsModal } from '@/components/purchase-settings-modal'
 import { cn } from '@/lib/utils'
 
 const nav = [
@@ -30,7 +31,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   const [mounted, setMounted] = useState(false)
   const [paletteOpen, setPaletteOpen] = useState(false)
   const [accountOpen, setAccountOpen] = useState(false)
-  const [rohlikModalOpen, setRohlikModalOpen] = useState(false)
+  const [purchaseSettingsOpen, setPurchaseSettingsOpen] = useState(false)
   const [deleteAccountModalOpen, setDeleteAccountModalOpen] = useState(false)
   const [language, setLanguage] = useState<'CZ' | 'EN'>('CZ')
 
@@ -145,9 +146,9 @@ export function AppShell({ children }: { children: React.ReactNode }) {
                 <Mail className="size-4" />
                 <span>Změnit e-mail</span>
               </Link>
-              <button type="button" role="menuitem" onClick={() => { setAccountOpen(false); setRohlikModalOpen(true) }} className="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground">
-                <Settings2 className="size-4" />
-                <span>Nastavení Rohlíku</span>
+              <button type="button" role="menuitem" onClick={() => { setAccountOpen(false); setPurchaseSettingsOpen(true) }} className="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground">
+                <ShoppingCart className="size-4" />
+                <span>Nastavení nákupu</span>
               </button>
               <div className="my-1 h-px bg-border" />
               <button type="button" role="menuitem" onClick={() => { setAccountOpen(false); setDeleteAccountModalOpen(true) }} className="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-destructive transition-colors hover:bg-destructive/10">
@@ -164,18 +165,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         </div>
       </aside>
 
-      {rohlikModalOpen ? (
-        <div className="fixed inset-0 z-50 grid place-items-center bg-foreground/35 p-4 backdrop-blur-sm" role="presentation" onMouseDown={(event) => { if (event.target === event.currentTarget) setRohlikModalOpen(false) }}>
-          <section role="dialog" aria-modal="true" aria-labelledby="rohlik-dialog-title" className="w-full max-w-md rounded-2xl border border-border bg-card p-6 shadow-2xl">
-            <div className="flex items-start justify-between gap-4">
-              <h2 id="rohlik-dialog-title" className="text-lg font-semibold tracking-tight">Nastavení Rohlíku</h2>
-              <button type="button" onClick={() => setRohlikModalOpen(false)} aria-label="Zavřít dialog" className="grid size-8 place-items-center rounded-lg text-xl leading-none text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground">×</button>
-            </div>
-            <p className="mt-4 text-sm leading-6 text-muted-foreground">Přihlášení proběhne na stránkách Rohlík.cz (OAuth). Heslo do aplikace neukládáme. Propojení může časem vypršet — pak účet znovu připojte tlačítkem níže.</p>
-            <button type="button" onClick={() => setRohlikModalOpen(false)} className="mt-6 inline-flex h-10 w-full items-center justify-center rounded-xl bg-primary px-4 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90">Připojit účet rohlík</button>
-          </section>
-        </div>
-      ) : null}
+      <PurchaseSettingsModal open={purchaseSettingsOpen} onOpenChange={setPurchaseSettingsOpen} />
 
       {deleteAccountModalOpen ? (
         <div className="fixed inset-0 z-50 grid place-items-center bg-foreground/45 p-4 backdrop-blur-sm" role="presentation" onMouseDown={(event) => { if (event.target === event.currentTarget) setDeleteAccountModalOpen(false) }}>
