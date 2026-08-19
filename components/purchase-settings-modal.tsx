@@ -1,43 +1,39 @@
 'use client'
 
 import { useState } from 'react'
-import { Check, KeyRound, Link2, ShoppingBasket, Store } from 'lucide-react'
+import { Check, KeyRound, Link2 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
-type ShopId = 'rohlik' | 'kosik'
+export type ShopId = 'rohlik' | 'kosik'
 type RohlikMethod = 'oauth' | 'password'
 
-const shops: { id: ShopId; label: string; icon: typeof Store }[] = [
-  { id: 'rohlik', label: 'Rohlík.cz', icon: ShoppingBasket },
-  { id: 'kosik', label: 'Košík.cz', icon: Store },
-]
+const shopMeta: Record<ShopId, { label: string }> = {
+  rohlik: { label: 'Rohlík.cz' },
+  kosik: { label: 'Košík.cz' },
+}
 
-export function PurchaseSettingsModal({
+export function ShopConnectionModal({
+  shopId,
   open,
+  connected,
   onOpenChange,
+  onConnect,
+  onDisconnect,
 }: {
+  shopId: ShopId
   open: boolean
+  connected: boolean
   onOpenChange: (open: boolean) => void
+  onConnect: () => void
+  onDisconnect: () => void
 }) {
-  const [activeShop, setActiveShop] = useState<ShopId>('rohlik')
   const [rohlikMethod, setRohlikMethod] = useState<RohlikMethod>('oauth')
-  const [connected, setConnected] = useState<Record<ShopId, boolean>>({
-    rohlik: false,
-    kosik: false,
-  })
+  const label = shopMeta[shopId].label
 
   if (!open) return null
 
   function close() {
     onOpenChange(false)
-  }
-
-  function connect(shop: ShopId) {
-    setConnected((s) => ({ ...s, [shop]: true }))
-  }
-
-  function disconnect(shop: ShopId) {
-    setConnected((s) => ({ ...s, [shop]: false }))
   }
 
   return (
@@ -51,16 +47,16 @@ export function PurchaseSettingsModal({
       <section
         role="dialog"
         aria-modal="true"
-        aria-labelledby="purchase-settings-title"
-        className="w-full max-w-lg rounded-2xl border border-border bg-card p-6 shadow-2xl"
+        aria-labelledby={`${shopId}-settings-title`}
+        className="w-full max-w-md rounded-2xl border border-border bg-card p-6 shadow-2xl"
       >
         <div className="flex items-start justify-between gap-4">
           <div>
-            <h2 id="purchase-settings-title" className="text-lg font-semibold tracking-tight">
-              Nastavení nákupu
+            <h2 id={`${shopId}-settings-title`} className="text-lg font-semibold tracking-tight">
+              Nastavení {label}
             </h2>
             <p className="mt-1 text-sm leading-6 text-muted-foreground">
-              Propojte účty e-shopů, kam se odesílá nákupní seznam.
+              Propojte účet, kam se odesílá nákupní seznam.
             </p>
           </div>
           <button
@@ -73,98 +69,52 @@ export function PurchaseSettingsModal({
           </button>
         </div>
 
-        {/* ── Shop tabs ── */}
-        <div
-          role="tablist"
-          aria-label="Výběr e-shopu"
-          className="mt-5 flex items-center gap-1 rounded-xl border border-border bg-secondary/40 p-1"
-        >
-          {shops.map((shop) => {
-            const active = activeShop === shop.id
-            return (
-              <button
-                key={shop.id}
-                type="button"
-                role="tab"
-                aria-selected={active}
-                onClick={() => setActiveShop(shop.id)}
-                className={cn(
-                  'flex flex-1 items-center justify-center gap-2 rounded-lg px-3 py-2 text-sm font-semibold transition-colors',
-                  active
-                    ? 'bg-card text-foreground shadow-sm'
-                    : 'text-muted-foreground hover:text-foreground',
-                )}
+        <div className="mt-5 flex flex-col gap-5">
+          {connected ? (
+            <ConnectedState label={label} onDisconnect={onDisconnect} />
+          ) : shopId === 'rohlik' ? (
+            <>
+              <div
+                role="radiogroup"
+                aria-label="Způsob přihlášení k Rohlík.cz"
+                className="flex items-center gap-1 rounded-xl border border-border p-1"
               >
-                <shop.icon className="size-4" />
-                {shop.label}
-                {connected[shop.id] ? (
-                  <span className="grid size-4 place-items-center rounded-full bg-primary text-primary-foreground">
-                    <Check className="size-2.5" strokeWidth={3} />
-                  </span>
-                ) : null}
-              </button>
-            )
-          })}
-        </div>
+                <MethodButton
+                  active={rohlikMethod === 'oauth'}
+                  icon={Link2}
+                  label="OAuth"
+                  onClick={() => setRohlikMethod('oauth')}
+                />
+                <MethodButton
+                  active={rohlikMethod === 'password'}
+                  icon={KeyRound}
+                  label="Jméno a heslo"
+                  onClick={() => setRohlikMethod('password')}
+                />
+              </div>
 
-        {/* ── Rohlík panel ── */}
-        {activeShop === 'rohlik' ? (
-          <div className="mt-5 flex flex-col gap-5">
-            {connected.rohlik ? (
-              <ConnectedState label="Rohlík.cz" onDisconnect={() => disconnect('rohlik')} />
-            ) : (
-              <>
-                <div
-                  role="radiogroup"
-                  aria-label="Způsob přihlášení k Rohlík.cz"
-                  className="flex items-center gap-1 rounded-xl border border-border p-1"
-                >
-                  <MethodButton
-                    active={rohlikMethod === 'oauth'}
-                    icon={Link2}
-                    label="OAuth"
-                    onClick={() => setRohlikMethod('oauth')}
-                  />
-                  <MethodButton
-                    active={rohlikMethod === 'password'}
-                    icon={KeyRound}
-                    label="Jméno a heslo"
-                    onClick={() => setRohlikMethod('password')}
-                  />
+              {rohlikMethod === 'oauth' ? (
+                <div className="flex flex-col gap-4">
+                  <p className="text-sm leading-6 text-muted-foreground">
+                    Přihlášení proběhne na stránkách Rohlík.cz. Heslo do aplikace neukládáme.
+                    Propojení může časem vypršet — pak účet znovu připojte tlačítkem níže.
+                  </p>
+                  <button
+                    type="button"
+                    onClick={onConnect}
+                    className="inline-flex h-10 w-full items-center justify-center rounded-xl bg-primary px-4 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
+                  >
+                    Připojit přes Rohlík.cz
+                  </button>
                 </div>
-
-                {rohlikMethod === 'oauth' ? (
-                  <div className="flex flex-col gap-4">
-                    <p className="text-sm leading-6 text-muted-foreground">
-                      Přihlášení proběhne na stránkách Rohlík.cz. Heslo do aplikace neukládáme.
-                      Propojení může časem vypršet — pak účet znovu připojte tlačítkem níže.
-                    </p>
-                    <button
-                      type="button"
-                      onClick={() => connect('rohlik')}
-                      className="inline-flex h-10 w-full items-center justify-center rounded-xl bg-primary px-4 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
-                    >
-                      Připojit přes Rohlík.cz
-                    </button>
-                  </div>
-                ) : (
-                  <LoginForm shopLabel="Rohlík.cz" onSubmit={() => connect('rohlik')} />
-                )}
-              </>
-            )}
-          </div>
-        ) : null}
-
-        {/* ── Košík panel ── */}
-        {activeShop === 'kosik' ? (
-          <div className="mt-5 flex flex-col gap-5">
-            {connected.kosik ? (
-              <ConnectedState label="Košík.cz" onDisconnect={() => disconnect('kosik')} />
-            ) : (
-              <LoginForm shopLabel="Košík.cz" onSubmit={() => connect('kosik')} />
-            )}
-          </div>
-        ) : null}
+              ) : (
+                <LoginForm shopLabel="Rohlík.cz" onSubmit={onConnect} />
+              )}
+            </>
+          ) : (
+            <LoginForm shopLabel="Košík.cz" onSubmit={onConnect} />
+          )}
+        </div>
       </section>
     </div>
   )

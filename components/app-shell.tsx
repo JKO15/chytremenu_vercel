@@ -11,12 +11,12 @@ import {
   ScrollText,
   Search,
   ShoppingBasket,
-  ShoppingCart,
+  Store,
   Sun,
   Trash2,
 } from 'lucide-react'
 import { CommandPalette } from '@/components/command-palette'
-import { PurchaseSettingsModal } from '@/components/purchase-settings-modal'
+import { type ShopId, ShopConnectionModal } from '@/components/purchase-settings-modal'
 import { cn } from '@/lib/utils'
 
 const nav = [
@@ -31,7 +31,11 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   const [mounted, setMounted] = useState(false)
   const [paletteOpen, setPaletteOpen] = useState(false)
   const [accountOpen, setAccountOpen] = useState(false)
-  const [purchaseSettingsOpen, setPurchaseSettingsOpen] = useState(false)
+  const [shopModalOpen, setShopModalOpen] = useState<ShopId | null>(null)
+  const [shopConnections, setShopConnections] = useState<Record<ShopId, boolean>>({
+    rohlik: false,
+    kosik: false,
+  })
   const [deleteAccountModalOpen, setDeleteAccountModalOpen] = useState(false)
   const [language, setLanguage] = useState<'CZ' | 'EN'>('CZ')
 
@@ -146,9 +150,15 @@ export function AppShell({ children }: { children: React.ReactNode }) {
                 <Mail className="size-4" />
                 <span>Změnit e-mail</span>
               </Link>
-              <button type="button" role="menuitem" onClick={() => { setAccountOpen(false); setPurchaseSettingsOpen(true) }} className="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground">
-                <ShoppingCart className="size-4" />
-                <span>Nastavení nákupu</span>
+              <button type="button" role="menuitem" onClick={() => { setAccountOpen(false); setShopModalOpen('rohlik') }} className="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground">
+                <ShoppingBasket className="size-4" />
+                <span className="flex-1">Rohlík.cz</span>
+                <ConnectionStatus connected={shopConnections.rohlik} />
+              </button>
+              <button type="button" role="menuitem" onClick={() => { setAccountOpen(false); setShopModalOpen('kosik') }} className="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground">
+                <Store className="size-4" />
+                <span className="flex-1">Košík.cz</span>
+                <ConnectionStatus connected={shopConnections.kosik} />
               </button>
               <div className="my-1 h-px bg-border" />
               <button type="button" role="menuitem" onClick={() => { setAccountOpen(false); setDeleteAccountModalOpen(true) }} className="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-destructive transition-colors hover:bg-destructive/10">
@@ -165,7 +175,22 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         </div>
       </aside>
 
-      <PurchaseSettingsModal open={purchaseSettingsOpen} onOpenChange={setPurchaseSettingsOpen} />
+      <ShopConnectionModal
+        shopId="rohlik"
+        open={shopModalOpen === 'rohlik'}
+        connected={shopConnections.rohlik}
+        onOpenChange={(next) => setShopModalOpen(next ? 'rohlik' : null)}
+        onConnect={() => setShopConnections((s) => ({ ...s, rohlik: true }))}
+        onDisconnect={() => setShopConnections((s) => ({ ...s, rohlik: false }))}
+      />
+      <ShopConnectionModal
+        shopId="kosik"
+        open={shopModalOpen === 'kosik'}
+        connected={shopConnections.kosik}
+        onOpenChange={(next) => setShopModalOpen(next ? 'kosik' : null)}
+        onConnect={() => setShopConnections((s) => ({ ...s, kosik: true }))}
+        onDisconnect={() => setShopConnections((s) => ({ ...s, kosik: false }))}
+      />
 
       {deleteAccountModalOpen ? (
         <div className="fixed inset-0 z-50 grid place-items-center bg-foreground/45 p-4 backdrop-blur-sm" role="presentation" onMouseDown={(event) => { if (event.target === event.currentTarget) setDeleteAccountModalOpen(false) }}>
@@ -298,5 +323,24 @@ export function AppShell({ children }: { children: React.ReactNode }) {
 
       <CommandPalette open={paletteOpen} onOpenChange={setPaletteOpen} />
     </div>
+  )
+}
+
+function ConnectionStatus({ connected }: { connected: boolean }) {
+  return (
+    <span
+      className={cn(
+        'flex shrink-0 items-center gap-1.5 font-mono text-[10px] font-semibold uppercase tracking-[0.08em]',
+        connected ? 'text-primary' : 'text-muted-foreground/60',
+      )}
+    >
+      <span
+        className={cn(
+          'size-1.5 rounded-full',
+          connected ? 'bg-primary' : 'border border-muted-foreground/50',
+        )}
+      />
+      {connected ? 'Propojeno' : 'Nepropojeno'}
+    </span>
   )
 }
