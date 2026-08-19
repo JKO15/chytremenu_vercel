@@ -112,7 +112,19 @@ export function ShopConnectionModal({
               )}
             </>
           ) : (
-            <LoginForm shopLabel="Košík.cz" onSubmit={onConnect} />
+            <div className="flex flex-col gap-4">
+              <p className="text-sm leading-6 text-muted-foreground">
+                Přihlášení proběhne na stránkách Košík.cz. Heslo do aplikace neukládáme.
+                Propojení může časem vypršet — pak účet znovu připojte tlačítkem níže.
+              </p>
+              <button
+                type="button"
+                onClick={onConnect}
+                className="inline-flex h-10 w-full items-center justify-center rounded-xl bg-primary px-4 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
+              >
+                Připojit přes Košík.cz
+              </button>
+            </div>
           )}
         </div>
       </section>
