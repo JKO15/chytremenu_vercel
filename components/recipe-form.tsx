@@ -222,9 +222,9 @@ export function RecipeForm() {
                     aria-pressed={category === c}
                     className={cn(
                       'rounded-full border px-3.5 py-1.5 font-mono text-[10px] font-medium uppercase tracking-[0.12em] transition-colors',
-                      category === c
-                        ? 'border-foreground bg-foreground text-background'
-                        : 'border-border text-muted-foreground hover:bg-secondary hover:text-foreground',
+                    category === c
+                      ? 'border-primary bg-primary text-primary-foreground'
+                      : 'border-border text-muted-foreground hover:bg-secondary hover:text-foreground',
                     )}
                   >
                     {c}
