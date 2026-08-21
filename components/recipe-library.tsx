@@ -90,7 +90,7 @@ export function RecipeLibrary() {
               className={cn(
                 'rounded-full px-3.5 py-1.5 font-mono text-[10px] font-medium uppercase tracking-[0.12em] transition-colors',
                 category === c
-                  ? 'bg-foreground text-background'
+                  ? 'bg-primary text-primary-foreground'
                   : 'text-muted-foreground hover:bg-secondary hover:text-foreground',
               )}
             >
@@ -110,8 +110,8 @@ export function RecipeLibrary() {
                 className={cn(
                   'rounded-full px-2.5 py-1 font-mono text-[10px] font-medium uppercase tracking-[0.12em] transition-colors',
                   sort === s.key
-                    ? 'text-primary underline decoration-primary decoration-2 underline-offset-4'
-                    : 'text-muted-foreground hover:text-foreground',
+                    ? 'bg-primary text-primary-foreground'
+                    : 'text-muted-foreground hover:bg-secondary hover:text-foreground',
                 )}
               >
                 {s.label}
