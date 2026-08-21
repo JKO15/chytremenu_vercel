@@ -185,9 +185,9 @@ export function RecipeForm() {
                     className="absolute inset-0 h-full w-full object-cover"
                   />
                   <div className="scrim absolute inset-0" />
-                  <span className="tag relative z-10 mt-auto mb-4 flex items-center gap-1.5 rounded-full bg-white/14 px-3 py-1.5 text-white backdrop-blur-md">
-                    <ImagePlus className="size-3.5" />
-                    změnit fotografii
+                  <span className="relative z-10 mt-auto mb-5 flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground shadow-lg shadow-black/20 ring-1 ring-white/20 transition-transform group-hover:scale-105">
+                    <ImagePlus className="size-4" />
+                    Změnit fotografii
                   </span>
                 </>
               ) : (
@@ -196,11 +196,12 @@ export function RecipeForm() {
                     alt={title || category}
                     variant={PLACEHOLDER_BY_CATEGORY[category]}
                     sizes="(min-width: 1024px) 640px, 100vw"
-                    className="-z-10 opacity-90 transition-opacity group-hover:opacity-100"
+                    className="-z-10 opacity-80 transition-opacity group-hover:opacity-90"
                   />
-                  <span className="tag relative z-10 mt-auto mb-4 flex items-center gap-1.5 rounded-full bg-white/14 px-3 py-1.5 text-white backdrop-blur-md">
-                    <ImagePlus className="size-3.5" />
-                    přidat vlastní fotografii
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent" />
+                  <span className="relative z-10 mt-auto mb-5 flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground shadow-lg shadow-black/20 ring-1 ring-white/20 transition-transform group-hover:scale-105">
+                    <ImagePlus className="size-4" />
+                    Přidat vlastní fotografii
                   </span>
                 </>
               )}
