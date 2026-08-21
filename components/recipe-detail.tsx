@@ -14,7 +14,7 @@ import {
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { MacroBar, energyShare } from '@/components/macros'
-import { dailyTarget, type Recipe } from '@/lib/data'
+import { dailyTarget, getPlaceholderVariant, type Recipe } from '@/lib/data'
 import { cn } from '@/lib/utils'
 
 function scaleAmount(amount: string, factor: number) {
@@ -71,7 +71,7 @@ export function RecipeDetail({ recipe }: { recipe: Recipe }) {
           <RecipeVisual
             src={recipe.image}
             alt={recipe.title}
-            variant={recipe.placeholder}
+            variant={getPlaceholderVariant(recipe)}
             priority
             sizes="(min-width: 1280px) 1280px, 100vw"
             className="-z-10"

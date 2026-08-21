@@ -30,7 +30,7 @@ export type Recipe = {
   steps: string[]
   tags: string[]
   image?: string
-  placeholder?: 'plate' | 'bowl' | 'kitchen'
+  placeholder?: 'plate' | 'bowl' | 'kitchen' | 'yogurt' | 'apple'
   shared?: boolean
 }
 
@@ -41,6 +41,26 @@ export const MEAL_CATEGORIES: MealCategory[] = [
   "Odpolední svačina",
   "Večeře",
 ]
+
+// Každý typ jídla má vlastní ilustrovaný placeholder, který se nabízí u receptů bez fotky.
+export const PLACEHOLDER_BY_CATEGORY: Record<MealCategory, NonNullable<Recipe['placeholder']>> = {
+  "Snídaně": "bowl",
+  "Dopolední svačina": "yogurt",
+  "Oběd": "plate",
+  "Odpolední svačina": "apple",
+  "Večeře": "kitchen",
+}
+
+// Vrátí placeholder variantu pro recept: explicitní hodnota má přednost, jinak se odvodí z kategorie jídla.
+export function getPlaceholderVariant(
+  recipe: Pick<Recipe, 'placeholder' | 'category'>,
+): NonNullable<Recipe['placeholder']> {
+  if (recipe.placeholder) return recipe.placeholder
+  if (recipe.category in PLACEHOLDER_BY_CATEGORY) {
+    return PLACEHOLDER_BY_CATEGORY[recipe.category as MealCategory]
+  }
+  return 'plate'
+}
 
 export const recipes: Recipe[] = [
   {

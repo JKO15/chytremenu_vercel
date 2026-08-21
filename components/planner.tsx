@@ -10,6 +10,7 @@ import {
   MEAL_CATEGORIES,
   dailyTarget,
   dayMacros,
+  getPlaceholderVariant,
   getRecipe,
   recipes,
   week as initialWeek,
@@ -197,7 +198,7 @@ export function Planner() {
                   <RecipeVisual
                     src={r.image}
                     alt={r.title}
-                    variant={r.placeholder}
+                    variant={getPlaceholderVariant(r)}
                     sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
                     className="-z-10 transition-transform duration-[900ms] ease-out group-hover:scale-[1.06]"
                   />
@@ -298,7 +299,7 @@ export function Planner() {
                                 <RecipeVisual
                                   src={r.image}
                                   alt={r.title}
-                                  variant={r.placeholder}
+                                  variant={getPlaceholderVariant(r)}
                                   compact
                                   sizes="200px"
                                   className="transition-transform duration-700 group-hover:scale-110"
@@ -404,7 +405,7 @@ export function Planner() {
                           <RecipeVisual
                             src={r.image}
                             alt={r.title}
-                            variant={r.placeholder}
+                            variant={getPlaceholderVariant(r)}
                             compact
                             sizes="48px"
                           />

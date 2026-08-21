@@ -6,7 +6,7 @@ import { ArrowUpRight, Clock, FileUp, Plus, Search, Users } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { MacroBar } from '@/components/macros'
 import { RecipeVisual } from '@/components/recipe-visual'
-import { MEAL_CATEGORIES, recipes } from '@/lib/data'
+import { MEAL_CATEGORIES, getPlaceholderVariant, recipes } from '@/lib/data'
 import { cn } from '@/lib/utils'
 
 type Sort = 'novinky' | 'kcal' | 'protein' | 'cas'
@@ -136,7 +136,7 @@ export function RecipeLibrary() {
             <RecipeVisual
               src={lead.image}
               alt={lead.title}
-              variant={lead.placeholder}
+              variant={getPlaceholderVariant(lead)}
               priority
               sizes="(min-width: 1024px) 50vw, 100vw"
               className="-z-10 transition-transform duration-[900ms] ease-out group-hover:scale-[1.04]"
@@ -191,7 +191,7 @@ export function RecipeLibrary() {
                 <RecipeVisual
                   src={r.image}
                   alt={r.title}
-                  variant={r.placeholder}
+                  variant={getPlaceholderVariant(r)}
                   sizes="(min-width: 1024px) 25vw, (min-width: 640px) 45vw, 100vw"
                   compact
                   className="-z-10 transition-transform duration-[900ms] ease-out group-hover:scale-[1.06]"
