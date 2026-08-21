@@ -69,10 +69,13 @@ export function RecipeLibrary() {
             <FileUp className="size-4" />
             <span className="sr-only">Import receptu ze souboru</span>
           </Button>
-          <Button className="h-11 gap-1.5 rounded-full pl-4 pr-5">
+          <Link
+            href="/recepty/novy"
+            className="inline-flex h-11 items-center gap-1.5 rounded-full bg-primary pl-4 pr-5 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/80"
+          >
             <Plus className="size-4" />
             Nový recept
-          </Button>
+          </Link>
         </div>
       </section>
 
@@ -87,7 +90,7 @@ export function RecipeLibrary() {
               className={cn(
                 'rounded-full px-3.5 py-1.5 font-mono text-[10px] font-medium uppercase tracking-[0.12em] transition-colors',
                 category === c
-                  ? 'bg-foreground text-background'
+                  ? 'bg-primary text-primary-foreground'
                   : 'text-muted-foreground hover:bg-secondary hover:text-foreground',
               )}
             >
@@ -107,8 +110,8 @@ export function RecipeLibrary() {
                 className={cn(
                   'rounded-full px-2.5 py-1 font-mono text-[10px] font-medium uppercase tracking-[0.12em] transition-colors',
                   sort === s.key
-                    ? 'text-primary underline decoration-primary decoration-2 underline-offset-4'
-                    : 'text-muted-foreground hover:text-foreground',
+                    ? 'bg-primary text-primary-foreground'
+                    : 'text-muted-foreground hover:bg-secondary hover:text-foreground',
                 )}
               >
                 {s.label}
