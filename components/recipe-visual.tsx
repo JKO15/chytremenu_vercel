@@ -9,7 +9,7 @@ type RecipeVisualProps = {
   priority?: boolean
   compact?: boolean
   showTitle?: boolean
-  variant?: 'plate' | 'bowl' | 'kitchen'
+  variant?: 'plate' | 'bowl' | 'kitchen' | 'yogurt' | 'apple'
 }
 
 export function RecipeVisual({
@@ -39,6 +39,8 @@ export function RecipeVisual({
     plate: '/food/placeholder-plate.png',
     bowl: '/food/placeholder-bowl.png',
     kitchen: '/food/placeholder-kitchen.png',
+    yogurt: '/food/placeholder-yogurt.png',
+    apple: '/food/placeholder-apple.png',
   } as const
 
   return (

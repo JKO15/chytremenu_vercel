@@ -4,25 +4,39 @@ import { RecipeVisual } from '@/components/recipe-visual'
 
 const variants = [
   {
-    key: 'plate' as const,
-    label: 'Talíř',
-    recipe: 'Zelený toast s avokádem',
-    description: 'Klasické prostření: vidlička vlevo, talíř uprostřed a nůž vpravo.',
-    tone: 'Teplý editorial',
+    key: 'bowl' as const,
+    label: 'Miska · Snídaně',
+    recipe: 'Miska s cizrnou, fetou a bylinkami',
+    description: 'Barevná miska s jednoduchými ingrediencemi, výchozí motiv pro snídaně.',
+    tone: 'Snídaně',
   },
   {
-    key: 'bowl' as const,
-    label: 'Miska',
-    recipe: 'Miska s cizrnou, fetou a bylinkami',
-    description: 'Barevná miska s jednoduchými ingrediencemi, vhodná pro bowl recepty.',
-    tone: 'Ingredience',
+    key: 'yogurt' as const,
+    label: 'Jogurt · Svačina I',
+    recipe: 'Jogurt s müsli a ořechy',
+    description: 'Kelímek jogurtu s müsli a ořechy jako motiv pro dopolední svačinu.',
+    tone: 'Dopolední svačina',
+  },
+  {
+    key: 'plate' as const,
+    label: 'Talíř · Oběd',
+    recipe: 'Zelený toast s avokádem',
+    description: 'Klasické prostření: vidlička vlevo, talíř uprostřed a nůž vpravo.',
+    tone: 'Oběd',
+  },
+  {
+    key: 'apple' as const,
+    label: 'Jablko · Svačina II',
+    recipe: 'Jablko s müsli tyčinkou',
+    description: 'Nakrájené jablko a müsli tyčinka jako motiv pro odpolední svačinu.',
+    tone: 'Odpolední svačina',
   },
   {
     key: 'kitchen' as const,
-    label: 'Kuchyně',
+    label: 'Hrnec · Večeře',
     recipe: 'Zapečené gnocchi se špenátem',
     description: 'Hrnec a příbor jako klidnější ilustrace pro teplá jídla a comfort food.',
-    tone: 'Kuchyňská ilustrace',
+    tone: 'Večeře',
   },
 ]
 
@@ -46,18 +60,19 @@ export default function PlaceholderDemoPage() {
                 ale ne bez charakteru.
               </h1>
               <p className="max-w-xl text-sm leading-6 text-muted-foreground">
-                Tři tematické varianty placeholderu pro recepty, které zatím nemají vlastní fotografii.
-                Každá varianta funguje v galerii, detailu i týdenním jídelníčku.
+                Pět tematických variant placeholderu — jedna pro každý typ jídla — pro recepty, které
+                zatím nemají vlastní fotografii. Každá varianta funguje v galerii, detailu i týdenním
+                jídelníčku.
               </p>
             </div>
             <div className="flex items-center gap-2 rounded-xl border border-border bg-card px-3 py-2 font-mono text-[10px] uppercase tracking-[0.1em] text-muted-foreground">
               <ImageOff className="size-4 text-brand-2" />
-              3 varianty k porovnání
+              5 variant k porovnání
             </div>
           </div>
         </header>
 
-        <section className="grid gap-5 lg:grid-cols-3" aria-label="Varianty placeholderů">
+        <section className="grid gap-5 sm:grid-cols-2 lg:grid-cols-5" aria-label="Varianty placeholderů">
           {variants.map((variant) => (
             <article key={variant.key} className="flex flex-col gap-4">
               <div className="relative isolate aspect-[4/3] overflow-hidden rounded-3xl border border-border shadow-2xl shadow-black/10">

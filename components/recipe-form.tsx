@@ -15,7 +15,8 @@ import {
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { MacroBar, energyShare } from '@/components/macros'
-import { MEAL_CATEGORIES, dailyTarget, type MealCategory } from '@/lib/data'
+import { RecipeVisual } from '@/components/recipe-visual'
+import { MEAL_CATEGORIES, PLACEHOLDER_BY_CATEGORY, dailyTarget, type MealCategory } from '@/lib/data'
 import { cn } from '@/lib/utils'
 
 type DraftIngredient = { amount: string; name: string; note: string }
@@ -191,14 +192,27 @@ export function RecipeForm() {
                 </>
               ) : (
                 <>
-                  <span className="grid size-11 place-items-center rounded-2xl bg-secondary">
-                    <ImagePlus className="size-5" />
+                  <RecipeVisual
+                    alt={title || category}
+                    variant={PLACEHOLDER_BY_CATEGORY[category]}
+                    sizes="(min-width: 1024px) 640px, 100vw"
+                    className="-z-10 opacity-90 transition-opacity group-hover:opacity-100"
+                  />
+                  <span className="tag relative z-10 mt-auto mb-4 flex items-center gap-1.5 rounded-full bg-white/14 px-3 py-1.5 text-white backdrop-blur-md">
+                    <ImagePlus className="size-3.5" />
+                    přidat vlastní fotografii
                   </span>
-                  <p className="mt-3 text-sm font-medium">Přidat fotografii</p>
-                  <p className="tag mt-1">JPG nebo PNG, ideálně 4:3</p>
                 </>
               )}
             </button>
+            {!photo ? (
+              <p className="text-[13px] leading-relaxed text-muted-foreground">
+                Bez vlastní fotky se použije ilustrovaný placeholder pro {'„'}
+                {category}
+                {'“'}. Každý typ jídla má svůj motiv — miska pro snídani, jogurt pro svačinu I, talíř
+                pro oběd, jablko pro svačinu II a hrnec pro večeři.
+              </p>
+            ) : null}
 
             <label className="flex flex-col gap-1.5">
               <span className="tag">Název receptu</span>
