@@ -207,7 +207,7 @@ export function RecipeForm() {
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 placeholder="např. Cottage sýr s žitným chlebem a mrkví"
-                className="h-12 rounded-xl border border-border bg-card px-4 text-lg font-semibold tracking-tight outline-none transition-colors placeholder:font-normal placeholder:text-muted-foreground focus:border-primary/50"
+                className="h-12 rounded-xl border border-border bg-card px-4 text-[15px] font-semibold tracking-tight outline-none transition-colors placeholder:font-normal placeholder:text-muted-foreground focus:border-primary/50"
               />
             </label>
 
